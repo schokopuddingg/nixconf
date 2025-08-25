@@ -9,6 +9,9 @@
     flake-utils.url = "github:numtide/flake-utils";
     treefmt-nix.url = "github:numtide/treefmt-nix";
 
+    # Plasma Manager
+    plasma-manager.url = "github:nix-community/plasma-manager";
+
     # Home Manager
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
@@ -44,6 +47,7 @@
       spicetify-nix,
       niri,
       lix-module,
+      plasma-manager,
       ...
     }:
     let
@@ -77,6 +81,7 @@
           modules = [
             spicetify-nix.homeManagerModules.default
             niri.homeModules.niri
+            plasma-manager.homeManagerModules.plasma-manager
             ./home.nix
           ];
           extraSpecialArgs = {

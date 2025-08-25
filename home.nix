@@ -52,6 +52,14 @@
     ];
   };
 
+  programs.plasma = {
+    enable = true;
+    workspace = {
+      # Wähle hier den Pfad zu deinem Hintergrundbild
+      wallpaper = ./gruvbox-dark-rainbow.png;
+    };
+  };
+
   programs = {
 
     fish.enable = true;
@@ -109,6 +117,7 @@
         enable = true;
         theme = spicePkgs.themes.catppuccin;
       };
+
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
