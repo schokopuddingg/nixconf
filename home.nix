@@ -3,9 +3,16 @@
   pkgs,
   userName,
   spicetify-nix,
+  inputs,
   ...
 }:
 {
+  imports = [
+    inputs.spicetify-nix.homeManagerModules.default
+    inputs.niri.homeModules.niri
+    inputs.plasma-manager.homeManagerModules.plasma-manager
+    ./shell.nix
+  ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = userName;
@@ -55,14 +62,12 @@
   programs.plasma = {
     enable = true;
     workspace = {
-      # Wähle hier den Pfad zu deinem Hintergrundbild
-      wallpaper = ./gruvbox-dark-rainbow.png;
+      # set wallpaper
+      wallpaper = ./messe-frankfurt-staircase-with-logo.png; # idk what I'm doing wrong but wallpaper somehow not working qwq
     };
   };
 
   programs = {
-
-    fish.enable = true;
 
     niri = {
       enable = true;

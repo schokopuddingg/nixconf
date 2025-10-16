@@ -49,7 +49,7 @@
       lix-module,
       plasma-manager,
       ...
-    }:
+    }@inputs:
     let
       hostName = "tuxedo"; # Hostname
       userName = "schokopuddingg"; # User name
@@ -67,9 +67,15 @@
             ./configuration.nix
             ./hardware-configuration.nix
             lix-module.nixosModules.default
+            home-manager.nixosModules.home-manager
           ];
           specialArgs = {
-            inherit hostName;
+            inherit
+              hostName
+              userName
+              spicetify-nix
+              inputs
+              ;
           };
         };
       };
@@ -79,13 +85,10 @@
         "${userName}" = home-manager.lib.homeManagerConfiguration {
           pkgs = pkgs;
           modules = [
-            spicetify-nix.homeManagerModules.default
-            niri.homeModules.niri
-            plasma-manager.homeManagerModules.plasma-manager
             ./home.nix
           ];
           extraSpecialArgs = {
-            inherit userName spicetify-nix;
+            inherit userName spicetify-nix inputs;
           };
         };
       };

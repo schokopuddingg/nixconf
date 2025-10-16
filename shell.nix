@@ -12,10 +12,15 @@
 
   config = lib.mkIf config.bpletza.workstation.shell {
 
-    programs.fish.enable = true;
+    programs.fish = {
+      enable = true; 
+    };
 
     programs.zsh = {
       enable = true;
+      initContent = ''
+        ${pkgs.neofetch}/bin/neofetch
+      '';
       plugins = [
         {
           name = "nix-zsh-completions";

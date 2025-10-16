@@ -4,6 +4,10 @@
   config,
   pkgs,
   hostName,
+  lib,
+  userName,
+  spicetify-nix,
+  inputs,
   ...
 }:
 
@@ -31,7 +35,7 @@
       };
     };
   };
-  
+
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -54,9 +58,11 @@
     LC_TELEPHONE = "de_DE.UTF-8";
     LC_TIME = "de_DE.UTF-8";
   };
-
+  #    extraSpecialArgs = {
+  #            inherit userName spicetify-nix inputs;
+  #          };
   # Graphical Interface
-  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.enable = false;
   services.desktopManager.plasma6.enable = true;
 
   # Console Key Map
@@ -103,10 +109,30 @@
       gajim
       putty
       ncspot
+      veracrypt
+      cryptomator
+      xournalpp
+      mastodon
+      ardour
+      audacity
+      libreoffice
+      neomutt
+      texliveFull
+      nh
+      localsend
+      naps2
+      neofetch
+      bluetuith
     ];
     shell = pkgs.fish;
   };
 
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.users.schokopuddingg = ./home.nix;
+  home-manager.extraSpecialArgs = {
+    inherit userName spicetify-nix inputs;
+  };
   # Programs
   programs.fish.enable = true;
   programs.firefox.enable = true;
@@ -119,7 +145,11 @@
   boot.extraModulePackages = with config.boot.kernelPackages; [
     v4l2loopback
   ];
-  boot.kernelModules = [ "v4l2loopback" "udf" "iso9660" ];
+  boot.kernelModules = [
+    "v4l2loopback"
+    "udf"
+    "iso9660"
+  ];
   boot.extraModprobeConfig = ''
     options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
   '';
@@ -143,6 +173,12 @@
       layout = "de";
       variant = "";
     };
+
+    desktopManager = {
+      xterm.enable = false;
+      xfce.enable = true;
+    };
+
     windowManager.awesome = {
       enable = true;
       luaModules = with pkgs.luaPackages; [
@@ -153,10 +189,18 @@
     };
   };
 
+  services.greetd = {
+    enable = true;
+    settings.default_session.command = "${lib.getExe pkgs.greetd.tuigreet} --remember-session";
+    # useTextGreeter = true;
+  };
+
+  services.displayManager.defaultSession = "xfce";
+
   # System Wide Packages
   environment.systemPackages = with pkgs; [
     git
-    
+
     # support both 32-bit and 64-bit applications
     wineWowPackages.stable
 
@@ -178,6 +222,13 @@
     # native wayland support (unstable)
     wineWowPackages.waylandFull
   ];
+
+  programs.sway = {
+
+    enable = true;
+
+    package = pkgs.swayfx;
+  };
 
   # Enable SSH daemon
   services.openssh.enable = true;
