@@ -13,7 +13,7 @@
   config = lib.mkIf config.bpletza.workstation.shell {
 
     programs.fish = {
-      enable = true; 
+      enable = true;
     };
 
     programs.zsh = {

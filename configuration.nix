@@ -44,6 +44,10 @@
   networking.hostName = hostName;
   networking.networkmanager.enable = true;
 
+  # Use wpa_cli to control wifi
+  networking.wireless.userControlled.enable = true;
+  users.extraUsers.schokopuddingg.extraGroups = [ "wheel" ];
+
   # Localization
   time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -62,7 +66,7 @@
   #            inherit userName spicetify-nix inputs;
   #          };
   # Graphical Interface
-  services.displayManager.sddm.enable = false;
+  services.displayManager.ly.enable = true;
   services.desktopManager.plasma6.enable = true;
 
   # Console Key Map
@@ -123,6 +127,12 @@
       naps2
       neofetch
       bluetuith
+      sshs
+      gping
+      duf
+      superfile
+      kitty
+      screen
     ];
     shell = pkgs.fish;
   };
@@ -179,18 +189,12 @@
       xfce.enable = true;
     };
 
-    windowManager.awesome = {
-      enable = true;
-      luaModules = with pkgs.luaPackages; [
-        luarocks
-        luadbi-mysql
-        awesome-wm-widgets
-      ];
-    };
+    windowManager.openbox.enable = true;
+
   };
 
   services.greetd = {
-    enable = true;
+    enable = false;
     settings.default_session.command = "${lib.getExe pkgs.greetd.tuigreet} --remember-session";
     # useTextGreeter = true;
   };
