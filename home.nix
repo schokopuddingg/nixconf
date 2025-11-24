@@ -106,8 +106,8 @@
           # MODULE CONFIGS
 
           clock = {
-            timezone = "America/Mexico_City";
-            format = "{:%I:%M  %d, %m}";
+            timezone = "Europe/Berlin";
+            format = "{:%I:%M  %d.%m.%y}";
             tooltip-format = "{calendar}";
             calendar.mode = "month";
           };
@@ -115,25 +115,25 @@
           cpu = {
             format = "{usage}% ";
             tooltip = true;
-            tooltip-format = "Uso de CPU: {usage}%\nNúcleos: {cores}";
+            tooltip-format = "CPU usage: {usage}%\Cores: {cores}";
           };
 
           memory = {
             format = "{}% 󰍛";
             tooltip = true;
-            tooltip-format = "RAM en uso: {used} / {total} ({percentage}%)";
+            tooltip-format = "RAM used: {used} / {total} ({percentage}%)";
           };
 
           disk = {
             format = "{percentage_free}% ";
             tooltip = true;
-            tooltip-format = "Espacio libre: {free} / {total} ({percentage_free}%)";
+            tooltip-format = "Free space: {free} / {total} ({percentage_free}%)";
           };
 
           temperature = {
             format = "{temperatureC}°C {icon}";
             tooltip = true;
-            tooltip-format = "Temperatura actual: {temperatureC}°C\nCrítico si > 80°C";
+            tooltip-format = "Current temperature: {temperatureC}°C\nCritical temperature > 80°C";
             format-icons = [ "" ];
           };
 
