@@ -132,6 +132,8 @@
       superfile
       kitty
       screen
+      wofi
+      nemo
     ];
     shell = pkgs.fish;
   };
