@@ -128,7 +128,7 @@
           "run0"
           ","
         ];
-        auto_sync = false;
+        auto_sync = true;
         sync.records = true;
       };
     };

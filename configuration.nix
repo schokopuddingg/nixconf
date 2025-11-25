@@ -67,7 +67,6 @@
   #          };
   # Graphical Interface
   services.displayManager.ly.enable = true;
-  services.desktopManager.plasma6.enable = true;
 
   # Console Key Map
   console.keyMap = "de";
@@ -145,6 +144,7 @@
   };
   # Programs
   programs.fish.enable = true;
+  programs.zsh.enable = true;
   programs.firefox.enable = true;
   fonts.packages = [
     pkgs.nerd-fonts.fira-code
@@ -199,10 +199,13 @@
     # useTextGreeter = true;
   };
 
-  services.displayManager.defaultSession = "xfce";
+  services.displayManager.defaultSession = "sway";
 
   # System Wide Packages
   environment.systemPackages = with pkgs; [
+
+    home-manager
+
     git
 
     # support both 32-bit and 64-bit applications
