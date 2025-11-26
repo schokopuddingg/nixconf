@@ -6,7 +6,7 @@
 }:
 
 let
-  css = ./waybar.css;
+  css = ./style.css;
 in
 
 {

@@ -11,7 +11,7 @@
     inputs.spicetify-nix.homeManagerModules.default
     inputs.niri.homeModules.niri
     ./shell.nix
-    ./wm/config.nix
+    ./wm/default.nix
   ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -60,12 +60,6 @@
   };
 
   programs = {
-
-    wlogout = {
-      enable = true;
-    };
-
-    swaylock.package = pkgs.swaylock-effects;
 
     niri = {
       enable = true;

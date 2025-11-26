@@ -208,6 +208,11 @@
 
     home-manager
 
+    grim # screenshot functionality
+    slurp # screenshot functionality
+    wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
+    mako # notification system developed by swaywm maintainer
+
     git
 
     # support both 32-bit and 64-bit applications
@@ -235,7 +240,7 @@
   programs.sway = {
 
     enable = true;
-
+    wrapperFeatures.gtk = true;
     package = pkgs.swayfx;
   };
 
