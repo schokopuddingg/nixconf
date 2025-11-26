@@ -7,6 +7,6 @@
 
 {
   imports = [
-    ./waybar/config.nix
+    ./waybar/frutiger.nix # depending on prefered theme
   ];
 }

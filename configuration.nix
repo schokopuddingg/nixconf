@@ -134,6 +134,9 @@
       screen
       wofi
       nemo
+      gzip
+      unzip
+      lxappearance
     ];
     shell = pkgs.fish;
   };
@@ -243,6 +246,8 @@
     wrapperFeatures.gtk = true;
     package = pkgs.swayfx;
   };
+
+
 
   # Enable SSH daemon
   services.openssh.enable = true;
