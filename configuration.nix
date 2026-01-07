@@ -36,6 +36,13 @@
     };
   };
 
+  hardware.graphics.extraPackages = with pkgs; [
+    vaapiIntel
+    intel-media-driver
+    vaapiVdpau
+    libvdpau-va-gl
+  ];
+
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -132,17 +139,23 @@
       superfile
       kitty
       screen
-      wofi
+      rofi
       nemo
-      gzip
-      unzip
-      lxappearance
+      kdePackages.dolphin
+      dunst
+      pavucontrol
+      pamixer
+      intel-gpu-tools
+      ffmpeg
+      gimp
+      nwg-look
     ];
     shell = pkgs.fish;
   };
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
+  home-manager.backupFileExtension = "backup";
   home-manager.users.schokopuddingg = ./home.nix;
   home-manager.extraSpecialArgs = {
     inherit userName spicetify-nix inputs;
@@ -182,8 +195,10 @@
   };
 
   # X Server & Window Manager
+  services.xserver.videoDrivers = [ "modesetting" ];
+
   services.xserver = {
-    enable = true;
+    enable = false;
     xkb = {
       layout = "de";
       variant = "";
@@ -191,10 +206,10 @@
 
     desktopManager = {
       xterm.enable = false;
-      xfce.enable = true;
+      xfce.enable = false;
     };
 
-    windowManager.openbox.enable = true;
+    windowManager.openbox.enable = false;
 
   };
 
@@ -204,7 +219,7 @@
     # useTextGreeter = true;
   };
 
-  services.displayManager.defaultSession = "sway";
+  services.displayManager.defaultSession = "hyprland";
 
   # System Wide Packages
   environment.systemPackages = with pkgs; [
@@ -247,7 +262,18 @@
     package = pkgs.swayfx;
   };
 
+  programs.hyprland = {
+    enable = true;
+    package = pkgs.hyprland;
+  };
 
+  # Wichtig für Portale (für Screensharing, File Picker, etc.)
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+    ];
+  };
 
   # Enable SSH daemon
   services.openssh.enable = true;
